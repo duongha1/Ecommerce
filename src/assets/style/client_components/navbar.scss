@@ -1,0 +1,29 @@
+@import "../variable";
+#navbar {
+  border: solid 1px $primary-color;
+  .logo {
+    width: 100px;
+  }
+  .navbar-nav {
+    .nav-item {
+      margin: 5px;
+      .nav-link {
+        padding: 0px;
+      }
+    }
+    a {
+      color: $secondary-color;
+    }
+  }
+  .icons {
+    width: 100%;
+    svg {
+      width: 20px;
+      margin: 0 15px;
+      cursor: pointer;
+    }
+  }
+  .navbar-text {
+    display: flex;
+  }
+}

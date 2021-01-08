@@ -1,0 +1,7 @@
+@import "../variable";
+.card-body {
+  text-align: center;
+  .product-name {
+    color: $secondary-color;
+  }
+}
