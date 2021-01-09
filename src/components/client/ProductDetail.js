@@ -26,10 +26,16 @@ class ProductDetail extends Component {
                 })
             })
     }
-    handdleChangeQuantity=(data)=>{
-        this.setState({
-            quantity: this.state.quantity + data
-        })
+    handdleChangeQuantity=(data, operator = false)=>{
+        if(operator){ //if operator is true, the quantity is inputed from keyboards
+            this.setState({
+                quantity: data
+            })
+        }else{
+            this.setState({
+                quantity: this.state.quantity + data
+            })
+        }
     }
     render() {
         const {image, name, price} = this.state.producr_detail;

@@ -13,8 +13,10 @@ import {Link, NavLink} from 'react-router-dom'
 import Login from '../../assets/icons/login'
 import Cart from '../../assets/icons/cart'
 import Search from '../../assets/icons/search'
+import { connect } from 'react-redux'
 
-export default class NavBarClient extends Component {
+
+class NavBarClient extends Component {
     render() {
         const toggle = false;
         const isOpen = false;
@@ -91,3 +93,11 @@ export default class NavBarClient extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) =>{
+    return {
+        cart: state.cart
+    }
+}
+
+export default connect(mapStateToProps)(NavBarClient)

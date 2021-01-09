@@ -5,27 +5,35 @@ import Login from './components/admin/Login';
 import AllProducts from './components/client/AllProducts';
 import ProductDetail from './components/client/ProductDetail';
 import NavBarClient from './components/client/NavBarClient'
+import {createStore} from 'redux'
+import Reducer from './components/reducer/Reducer'
+import {Provider} from 'react-redux'
 
 function App() {
+  
+  const store = createStore(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/admin/login">
-          <Login/>
-        </Route>
-        <Route path="/admin">
-          <ShoppingAdmin/>
-        </Route>
-        <Route path="/products/:id">
-          <NavBarClient/>
-          <ProductDetail/>
-        </Route>
-        <Route path="/products">
-          <NavBarClient/>
-          <AllProducts/>
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/admin/login">
+            <Login/>
+          </Route>
+          <Route path="/admin">
+            <ShoppingAdmin/>
+          </Route>
+          <Route path="/products/:id">
+            <NavBarClient/>
+            <ProductDetail/>
+          </Route>
+          <Route path="/products">
+            <NavBarClient/>
+            <AllProducts/>
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 
