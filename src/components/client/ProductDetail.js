@@ -5,12 +5,13 @@ import ImageContainer from './ImageContainer'
 import CommonQuantityInput from './CommonQuantityInput'
 import axios from 'axios'
 import API_CONSTANT from '../../assets/constant/api';
+import {connect} from 'react-redux'
 
 
 class ProductDetail extends Component {
     state={
-        quantity:0,
-        producr_detail:{
+        quantity:1,
+        product_detail:{
             id: null,
             name: '',
             image:[]
@@ -21,7 +22,7 @@ class ProductDetail extends Component {
         axios.get(`${API_CONSTANT.domain}/products/${this.props.match.params.id}`)
             .then(res=>{
                 this.setState({
-                    producr_detail:res.data,
+                    product_detail:res.data,
                     loading: true
                 })
             })
@@ -37,8 +38,14 @@ class ProductDetail extends Component {
             })
         }
     }
+    handleAddToCart = ()=>{
+        this.props.addToCart({
+            ...this.state.product_detail,
+            image: this.state.product_detail.image[0]
+        }, this.state.quantity)
+    }
     render() {
-        const {image, name, price} = this.state.producr_detail;
+        const {image, name, price} = this.state.product_detail;
         return (
             <Container className="my-5">
                 {this.state.loading === false ? <Spinner className="d-flex my-5 mx-auto" color="dark" /> : 
@@ -54,7 +61,7 @@ class ProductDetail extends Component {
                                     name={name}
                                     onChange={this.handdleChangeQuantity}
                                 />
-                                <Button  color="dark" outline>Add to cart</Button>
+                                <Button  color="dark" onClick={this.handleAddToCart} outline>Add to cart</Button>
                             </Card>
                         </Col>
                     </Row>
@@ -64,4 +71,18 @@ class ProductDetail extends Component {
     }
 }
 
-export default withRouter(ProductDetail)
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        addToCart: (product, quantity)=>{
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: {
+                    ...product,
+                    quantity
+                } 
+            })
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(ProductDetail))

@@ -3,8 +3,9 @@ import { Row, Spinner } from 'reactstrap'
 import Product from './Product'
 import axios from 'axios'
 import API from '../../assets/constant/api'
+import {connect} from 'react-redux'
 
-export default class ProductList extends Component {
+class ProductList extends Component {
     state={
         id:0,
         name: "",
@@ -32,7 +33,8 @@ export default class ProductList extends Component {
                                     id={product.id}
                                     name={product.name}
                                     price={product.price}
-                                    image={product.image}
+                                    image={product.image[0]}
+                                    addToCart={this.props.addToCart}
                                 />
                     })}
                 </Row>
@@ -40,3 +42,18 @@ export default class ProductList extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        addToCart: (product, quantity)=>{
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: {
+                    ...product,
+                    quantity
+                }
+            })
+        }
+    }
+}
+
+export default connect(null,mapDispatchToProps)(ProductList)

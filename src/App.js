@@ -8,6 +8,7 @@ import NavBarClient from './components/client/NavBarClient'
 import {createStore} from 'redux'
 import Reducer from './components/reducer/Reducer'
 import {Provider} from 'react-redux'
+import Cart from './components/client/Cart'
 
 function App() {
   
@@ -22,6 +23,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <ShoppingAdmin/>
+          </Route>
+          <Route path="/cart">
+            <Cart/>
           </Route>
           <Route path="/products/:id">
             <NavBarClient/>

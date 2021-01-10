@@ -82,6 +82,7 @@ class NavBarClient extends Component {
                             <div id="navCart">
                                 <NavLink exact to="/cart">
                                     <Cart/>
+                                    <div className="cart_qty">{this.props.cart_total}</div>
                                 </NavLink>
                             </div>
                             <Search/>
@@ -95,8 +96,11 @@ class NavBarClient extends Component {
 }
 
 const mapStateToProps = (state) =>{
+    const cart_total = state.cart.reduce((sum,product)=>{
+        return sum = product.quantity + sum
+    }, 0)
     return {
-        cart: state.cart
+        cart_total
     }
 }
 
