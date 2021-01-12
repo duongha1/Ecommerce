@@ -92,7 +92,7 @@ class Cart extends Component {
     handleCheckout=()=>{
         const token = window.localStorage.getItem('client_token');
         if(token){
-            axios.post(`${API_CONSTANT.domain}/cart`,{
+            axios.post(`${API_CONSTANT.domain}/carts`,{
                 ...this.props.cart
             },{
                 headers: {token}
