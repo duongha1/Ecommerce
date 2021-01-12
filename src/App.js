@@ -9,6 +9,7 @@ import {createStore} from 'redux'
 import Reducer from './components/reducer/Reducer'
 import {Provider} from 'react-redux'
 import Cart from './components/client/Cart'
+import LoginClient from './components/client/LoginClient';
 
 function App() {
   
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/admin">
             <ShoppingAdmin/>
+          </Route>
+          <Route path="/login">
+            <LoginClient/>
           </Route>
           <Route path="/cart">
             <Cart/>
